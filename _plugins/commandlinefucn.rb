@@ -52,6 +52,7 @@ module Jekyll
         priority :highest
 
         def ts(dir)
+            #Read commit time from git log and store in a map
             th = {}
             curt = 0
 
@@ -75,9 +76,15 @@ module Jekyll
 
             site.data.each_pair do | name, cmds | 
                 [cmds].flatten.each do | cmd |
-                
+
                     next if cmd['hide']
 
+                    #Look for playback pack and transform it while recorder & zipfile exists
+                    unless cmd['recorder'].nil? || cmd['recorder'] == ''
+                        puts "%s/_playback/%s.zip" % [Dir.getwd, name]
+                    end
+
+                    #Set post time and collect the post
                     cmd['date'] = Time.at(th[name]) 
                     site.posts << CommandLinePost.new(site,site.dest, cmd)
 
