@@ -1,4 +1,5 @@
 require 'rake'
+require "zip/zip"
 
 module Jekyll
 
@@ -78,10 +79,22 @@ module Jekyll
                 [cmds].flatten.each do | cmd |
 
                     next if cmd['hide']
-
                     #Look for playback pack and transform it while recorder & zipfile exists
                     unless cmd['recorder'].nil? || cmd['recorder'] == ''
-                        puts "%s/_playback/%s.zip" % [Dir.getwd, name]
+                        filename = "%s/_playback/%s.zip" % [Dir.getwd, name]
+                        puts filename
+                        if File.file?(filename)
+                            Zip::ZipFile.open(filename) do |it|
+                                it.each do |entry|
+
+
+                                    puts it.read(entry)
+                                    puts "========="
+                                end
+                            end
+
+                            puts 'has file'
+                        end
                     end
 
                     #Set post time and collect the post

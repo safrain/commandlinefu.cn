@@ -38,7 +38,7 @@ script $type_file -t 2> $timing_file -q;
 echo "$term_w $term_h" > $meta_file;
 zip -jq $zip_file $type_file $timing_file $meta_file;
 
-mv $zip_file $DATADIR/$1.zip
+mv $zip_file $PLAYBACKDIR/$1.zip
 
 if [ -z "$EDITOR" ]; then
     EDITOR='/usr/bin/editor'
