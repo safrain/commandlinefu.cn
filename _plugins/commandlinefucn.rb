@@ -82,7 +82,7 @@ module Jekyll
                     #Look for playback pack and transform it while recorder & zipfile exists
                     unless cmd['recorder'].nil? || cmd['recorder'] == ''
 			puts ''
-                        filename = "%s/_playback/%s.zip" % [Dir.getwd, name]
+                        filename = "%s/playback/%s.zip" % [Dir.getwd, name]
 			puts "Found playback package '#{filename}'"
                         if File.file?(filename)
 			    Zip::ZipFile.open(filename) do |it|
@@ -97,7 +97,7 @@ module Jekyll
 					r << type_processed[cursor, p[1].to_i]
 					cursor += p[1].to_i	
 				}
-                        	output_filename = "%s/_playback/%s.json" % [Dir.getwd, name]
+                        	output_filename = "%s/playback/%s.json" % [Dir.getwd, name]
                         	puts "Writing json to '#{output_filename}'"
 				File.open(output_filename, 'w') { |file| file.write(r.to_json) }
                             end

@@ -12,7 +12,73 @@ layout: default
 感谢 <a href="http://weibo.com/n/{{ page.translator.weibo | url_esacpe }}" id="translator" wb_screen_name="{{ page.translator.weibo }}">@{{ page.translator.weibo }}</a> 翻译
 </blockquote>
 {% endif %}
+<script id="player-template" type="text/template">
+    <div>
+        <div id="player-pane">
+            <div id="play-button-overlay">
+                <button id="play-button" type="button" class="btn">
+                    <i class="glyphicon glyphicon-play"></i>
+                </button>
+            </div>
+            <div id="pause-alert" class="alert alert-dismissable alert-warn text-center pull-right">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                已暂停 <a id="resume-link" href="#">继续播放</a>
+            </div>
+            <div id="playback-term"></div>
 
+        </div>
+        <div id="control-pane">
+
+            <div id="progress-bar" class="progress progress-striped active">
+                <div id="progress" class="progress-bar"></div>
+            </div>
+            <div id="control-bar">
+                <button id="play-button-mini" type="button" class="btn">
+                    <i class="glyphicon glyphicon-play"></i>
+                </button>
+                <span id="time-display"></span>
+            </div>
+        </div>
+    </div>
+</script>
+<script id="loading-template" type="text/template">
+    <div id="loading-pane">
+		<img src="images/ajax-loader.gif">
+	</div>
+</script>
+<script id="error-template" type="text/template">
+    <div id="error-pane">
+    <div id="error-message">
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;._&nbsp;&nbsp;_&nbsp;,&nbsp;_&nbsp;._</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(_&nbsp;'&nbsp;(&nbsp;`&nbsp;&nbsp;)_&nbsp;&nbsp;.__)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;(&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;&nbsp;&nbsp;`)&nbsp;&nbsp;)&nbsp;_)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(__&nbsp;(_&nbsp;&nbsp;&nbsp;(_&nbsp;.&nbsp;_)&nbsp;_)&nbsp;,__)</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`~~`\&nbsp;'&nbsp;.&nbsp;/`~~`</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,:::&nbsp;;&nbsp;&nbsp;&nbsp;;&nbsp;:::,</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;':::::::::::::::'</div>
+<div>&nbsp;_____________/_&nbsp;__&nbsp;\____________</div>
+<div>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+<div>|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加载失败了...请稍候<a href="#" onclick="javascript:window.location.href=window.location.href">重试</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</div>
+<div>|________________________________|</div>
+	</div>
+	</div>
+</script>
+<script>
+    Player.create(
+        {
+            term_width: 80,
+            term_height: 24
+        },
+        '/playback/alt_1.json',
+        $('#terminal'),
+        function (player) {
+            player.play();
+        }
+    );
+
+</script>
 <div class="well">
 <code style="font-size: 2em">{{ page.command | escape }}</code>
 </div>
