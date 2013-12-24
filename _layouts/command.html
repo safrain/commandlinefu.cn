@@ -10,8 +10,14 @@ layout: default
 {% if page.translator.weibo %}
 <blockquote>
 感谢 <a href="http://weibo.com/n/{{ page.translator.weibo | url_esacpe }}" id="translator" wb_screen_name="{{ page.translator.weibo }}">@{{ page.translator.weibo }}</a> 翻译
+感谢 <a href="http://weibo.com/n/{{ page.recorder.weibo | url_esacpe }}" id="recorder" wb_screen_name="{{ page.recorder.weibo }}">@{{ page.recorder.weibo }}</a> 录制
 </blockquote>
 {% endif %}
+
+<div class="well">
+<code style="font-size: 2em">{{ page.command | escape }}</code>
+</div>
+<div id="terminal"></div>
 <script id="player-template" type="text/template">
     <div>
         <div id="player-pane">
@@ -74,14 +80,11 @@ layout: default
         '/playback/alt_1.json',
         $('#terminal'),
         function (player) {
-            player.play();
+    //        player.play();
         }
     );
 
 </script>
-<div class="well">
-<code style="font-size: 2em">{{ page.command | escape }}</code>
-</div>
 
 
 <wb:comments url="auto" width="auto" appkey="4269695581" ralateuid="2674868673" ></wb:comments>
