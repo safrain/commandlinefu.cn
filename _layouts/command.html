@@ -10,9 +10,13 @@ layout: default
 {% if page.translator.weibo %}
 <blockquote>
 感谢 <a href="http://weibo.com/n/{{ page.translator.weibo | url_esacpe }}" id="translator" wb_screen_name="{{ page.translator.weibo }}">@{{ page.translator.weibo }}</a> 翻译
-感谢 <a href="http://weibo.com/n/{{ page.recorder.weibo | url_esacpe }}" id="recorder" wb_screen_name="{{ page.recorder.weibo }}">@{{ page.recorder.weibo }}</a> 录制
-</blockquote>
 {% endif %}
+{% if page.recorder.weibo %}
+感谢 <a href="http://weibo.com/n/{{ page.recorder.weibo | url_esacpe }}" id="recorder" wb_screen_name="{{ page.recorder.weibo }}">@{{ page.recorder.weibo }}</a> 录制
+{% else %}
+欢迎使用 tools/record.sh {{page.name}} 命令进行录制 
+{% endif %}
+</blockquote>
 
 <div class="well">
 <code style="font-size: 2em">{{ page.command | escape }}</code>
@@ -71,13 +75,15 @@ layout: default
 	</div>
 	</div>
 </script>
+{% if page.recorder.weibo %}
 <script>
+	var playback_data = {{ page.playback }}
     Player.create(
         {
             term_width: 80,
             term_height: 24
         },
-        '/playback/alt_1.json',
+        playback_data,
         $('#terminal'),
         function (player) {
     //        player.play();
@@ -85,6 +91,7 @@ layout: default
     );
 
 </script>
+{% endif %}
 
 
 <wb:comments url="auto" width="auto" appkey="4269695581" ralateuid="2674868673" ></wb:comments>

@@ -7,7 +7,7 @@ else
 fi
 
 DATADIR="$BASEDIR/../_data"
-PLAYBACKDIR="$BASEDIR/../_playback"
+PLAYBACKDIR="$BASEDIR/../playback"
 
 
 
@@ -42,6 +42,14 @@ mv $zip_file $PLAYBACKDIR/$1.zip
 
 if [ -z "$EDITOR" ]; then
     EDITOR='/usr/bin/editor'
+fi
+
+if grep -e "^recorder:$" $DATADIR/$1.yaml
+then
+    echo FOUND
+else
+    echo """recorder:
+    weibo: ''""" >> $DATADIR/$1.yaml
 fi
 
 $EDITOR $DATADIR/$1.yaml 

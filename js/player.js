@@ -192,21 +192,11 @@
         });
     };
 
-    Player.create = function (meta, dataUrl, $container, callback) {
+    Player.create = function (meta, data, $container, callback) {
         $container.html($('#loading-template').html());
-        $.ajax({
-            url: dataUrl,
-            success: function (data) {
-                $container.html('');
-                $container.html($('#player-template').html());
-		console.log($container.html());
-                (typeof callback === 'function' ? callback : $.noop)(new Player($container.find('div'), meta, data));
-            },
-            error: function() {
-                $container.html($('#error-template').html());
-            },
-            dataType: 'json'
-        });
+        $container.html('');
+        $container.html($('#player-template').html());
+        (typeof callback === 'function' ? callback : $.noop)(new Player($container.find('div'), meta, data));
     };
 
     window.Player = Player;

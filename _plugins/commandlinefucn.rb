@@ -1,6 +1,6 @@
 require 'rake'
 require "zip/zip"
-
+require 'fileutils'
 module Jekyll
 
 
@@ -97,15 +97,14 @@ module Jekyll
 					r << type_processed[cursor, p[1].to_i]
 					cursor += p[1].to_i	
 				}
-                        	output_filename = "%s/playback/%s.json" % [Dir.getwd, name]
-                        	puts "Writing json to '#{output_filename}'"
-				File.open(output_filename, 'w') { |file| file.write(r.to_json) }
+				cmd['playback'] = r.to_json
                             end
                         end
                     end
 
                     #Set post time and collect the post
                     cmd['date'] = Time.at(th[name]) 
+		    cmd['name'] = name
                     site.posts << CommandLinePost.new(site,site.dest, cmd)
 
                 end
